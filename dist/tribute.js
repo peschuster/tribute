@@ -1132,7 +1132,12 @@ function () {
           var textSuffix = typeof this.tribute.replaceTextSuffix == 'string' ? this.tribute.replaceTextSuffix : ' ';
           text += textSuffix;
           var startPos = info.mentionPosition;
-          var endPos = info.mentionPosition + info.mentionText.length + textSuffix.length + info.mentionTriggerChar.length - 1;
+          var endPos = info.mentionPosition + info.mentionText.length + textSuffix.length;
+
+          if (!this.tribute.autocompleteMode) {
+            endPos += info.mentionTriggerChar.length - 1;
+          }
+
           myField.value = myField.value.substring(0, startPos) + text + myField.value.substring(endPos, myField.value.length);
           myField.selectionStart = startPos + text.length;
           myField.selectionEnd = startPos + text.length;
